@@ -1,125 +1,99 @@
-# Move Files to Root
+# move_files_to_root
 
-A Python utility script that recursively moves all files from subdirectories to a root folder with configurable duplicate handling strategies.
+A Python script that recursively moves all files from subdirectories to a root folder. It provides multiple strategies for handling duplicate files and gives detailed operation statistics.
+
+## Description
+
+`move_files_to_root.py` is designed to help organize files by moving them from nested subdirectories to a single root directory. It offers various methods for handling duplicate files and provides clear feedback about the operation's progress and results.
 
 ## Features
 
-- Move files from nested subdirectories to a root folder
-- Multiple duplicate handling strategies:
+- Moves files from any depth of subdirectories to the root folder
+- Offers multiple duplicate handling strategies:
   - Skip existing files
-  - Rename with counter (e.g., file(1).txt)
-  - Rename with timestamp
+  - Add counter to filename (e.g., document(1).pdf)
+  - Add timestamp to filename
   - Overwrite existing files
   - Interactive mode with user prompts
-- Detailed operation statistics
-- Error handling and reporting
+- Provides operation statistics (files moved, skipped, errors)
+- Includes comprehensive error handling
+
+## Requirements
+
+- Python 3.6+
+- No external dependencies required
 
 ## Installation
 
-Clone this repository and ensure you have Python 3.6 or higher installed.
-
+1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/yourusername/move_files_to_root.git
+```
+
+2. Navigate to the project directory:
+```bash
+cd move_files_to_root
 ```
 
 ## Usage
 
-### Basic Usage
-
-```python
-from move_files_to_root import move_files_to_root, DuplicateHandling
-
-# Move files with default settings (skip duplicates)
-success = move_files_to_root("/path/to/root/folder")
-```
-
-### Duplicate Handling Strategies
-
-```python
-# Skip duplicates (default behavior)
-success = move_files_to_root(
-    root_folder="/path/to/folder",
-    duplicate_handling=DuplicateHandling.SKIP
-)
-
-# Rename duplicates with counter
-success = move_files_to_root(
-    root_folder="/path/to/folder",
-    duplicate_handling=DuplicateHandling.RENAME_WITH_COUNTER
-)
-
-# Rename duplicates with timestamp
-success = move_files_to_root(
-    root_folder="/path/to/folder",
-    duplicate_handling=DuplicateHandling.RENAME_WITH_TIMESTAMP
-)
-
-# Overwrite existing files
-success = move_files_to_root(
-    root_folder="/path/to/folder",
-    duplicate_handling=DuplicateHandling.OVERWRITE
-)
-
-# Interactive mode (prompts user for each duplicate)
-success = move_files_to_root(
-    root_folder="/path/to/folder",
-    duplicate_handling=DuplicateHandling.INTERACTIVE
-)
-```
-
-### Command Line Usage
+### Command Line
 
 Run the script directly from the command line:
-
 ```bash
 python move_files_to_root.py
 ```
 
-## Example Use Cases
+The script will prompt you for:
+- Root folder path
+- Duplicate handling preference (in interactive mode)
 
-### 1. Consolidating Downloaded Files
-
-If you have a Downloads folder with nested subdirectories and want to move all files to the root Downloads folder:
+### Python Import
 
 ```python
 from move_files_to_root import move_files_to_root, DuplicateHandling
 
-# Move files with timestamp renaming for duplicates
+# Example with skip duplicates strategy
+success = move_files_to_root(
+    root_folder="/path/to/folder",
+    duplicate_handling=DuplicateHandling.SKIP
+)
+```
+
+### Duplicate Handling Options
+
+```python
+# Skip duplicates
+success = move_files_to_root(duplicate_handling=DuplicateHandling.SKIP)
+
+# Rename with counter
+success = move_files_to_root(duplicate_handling=DuplicateHandling.RENAME_WITH_COUNTER)
+
+# Rename with timestamp
+success = move_files_to_root(duplicate_handling=DuplicateHandling.RENAME_WITH_TIMESTAMP)
+
+# Overwrite existing files
+success = move_files_to_root(duplicate_handling=DuplicateHandling.OVERWRITE)
+
+# Interactive mode
+success = move_files_to_root(duplicate_handling=DuplicateHandling.INTERACTIVE)
+```
+
+## Examples
+
+### File Organization Example
+```python
+# Organize downloads folder with timestamp for duplicates
+from move_files_to_root import move_files_to_root, DuplicateHandling
+
 success = move_files_to_root(
     root_folder="/Users/username/Downloads",
     duplicate_handling=DuplicateHandling.RENAME_WITH_TIMESTAMP
 )
 ```
 
-### 2. Photo Organization
-
-When organizing photos that might have duplicate names from different cameras:
-
-```python
-# Interactive mode for careful photo organization
-success = move_files_to_root(
-    root_folder="/Users/username/Pictures/Vacation2023",
-    duplicate_handling=DuplicateHandling.INTERACTIVE
-)
-```
-
-### 3. Project File Consolidation
-
-When consolidating project files while ensuring no files are accidentally overwritten:
-
-```python
-# Use counter for duplicate files
-success = move_files_to_root(
-    root_folder="/path/to/project",
-    duplicate_handling=DuplicateHandling.RENAME_WITH_COUNTER
-)
-```
-
-## Sample Output
-
-When running in interactive mode:
-
+### Interactive Mode Example
+When running in interactive mode, you'll see prompts like this:
 ```
 File 'document.pdf' already exists in destination.
 Choose action:
@@ -137,21 +111,14 @@ Files skipped: 3
 Errors encountered: 0
 ```
 
-## Error Handling
+## Contributing
 
-The script handles various error scenarios:
-- Invalid or non-existent paths
-- Permission issues
-- File system errors
-- Duplicate file conflicts
+Feel free to submit issues and enhancement requests!
 
-## Return Values
+## License
 
-- Returns `True` if all operations completed successfully
-- Returns `False` if any errors were encountered
-- Exit code 0 for success, 1 for failure when run as main script
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Requirements
+## Author
 
-- Python 3.6+
-- Standard library modules only (no external dependencies)
+[Your Name]
