@@ -1,4 +1,4 @@
-# move_files_to_root
+# Move_Files_To_Root
 
 A Python script that recursively moves all files from subdirectories to a root folder. It provides multiple strategies for handling duplicate files and gives detailed operation statistics.
 
@@ -79,18 +79,59 @@ success = move_files_to_root(duplicate_handling=DuplicateHandling.OVERWRITE)
 success = move_files_to_root(duplicate_handling=DuplicateHandling.INTERACTIVE)
 ```
 
-## Examples
+## Use Cases
 
-### File Organization Example
+### 1. Photography Organization
+When consolidating photos from multiple cameras and events into a single directory:
 ```python
-# Organize downloads folder with timestamp for duplicates
-from move_files_to_root import move_files_to_root, DuplicateHandling
-
+# Use timestamp for unique filenames
 success = move_files_to_root(
-    root_folder="/Users/username/Downloads",
+    root_folder="/Users/username/Pictures/Vacation2023",
     duplicate_handling=DuplicateHandling.RENAME_WITH_TIMESTAMP
 )
 ```
+
+### 2. Downloads Cleanup
+Organize a cluttered downloads folder with many subdirectories:
+```python
+# Interactive mode for careful file management
+success = move_files_to_root(
+    root_folder="/Users/username/Downloads",
+    duplicate_handling=DuplicateHandling.INTERACTIVE
+)
+```
+
+### 3. Project File Consolidation
+Merge project files from multiple subfolders while preserving duplicates:
+```python
+# Use counter for duplicate files
+success = move_files_to_root(
+    root_folder="/path/to/project",
+    duplicate_handling=DuplicateHandling.RENAME_WITH_COUNTER
+)
+```
+
+### 4. Backup File Organization
+Consolidate backup files while skipping existing ones:
+```python
+# Skip if file already exists
+success = move_files_to_root(
+    root_folder="/path/to/backups",
+    duplicate_handling=DuplicateHandling.SKIP
+)
+```
+
+### 5. Media Library Cleanup
+Organize media files from various nested folders:
+```python
+# Overwrite older versions
+success = move_files_to_root(
+    root_folder="/path/to/media_library",
+    duplicate_handling=DuplicateHandling.OVERWRITE
+)
+```
+
+## Examples
 
 ### Interactive Mode Example
 When running in interactive mode, you'll see prompts like this:
@@ -118,7 +159,3 @@ Feel free to submit issues and enhancement requests!
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Author
-
-[Your Name]
